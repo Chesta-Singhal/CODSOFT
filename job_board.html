@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CareerConnect - Job Board</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fbfd;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(to right, #007bff, #0056b3);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1.1rem;
+    }
+    nav {
+      background: #003d99;
+      display: flex;
+      justify-content: center;
+      padding: 0.75rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffdb4d;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .section-title {
+      color: #0056b3;
+      margin: 2rem 0 1rem;
+      border-left: 5px solid #007bff;
+      padding-left: 1rem;
+      font-size: 1.8rem;
+    }
+    .job-card {
+      background: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+    }
+    .job-card h3 {
+      color: #003d99;
+      margin-bottom: 0.25rem;
+    }
+    .job-card p {
+      color: #666;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      margin-top: 0.5rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+    .form, .dashboard {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .highlight-box {
+      background-color: #e8f0fe;
+      border-left: 4px solid #007bff;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+    }
+    footer {
+      background: #003d99;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    .icon {
+      font-weight: bold;
+      color: #007bff;
+      margin-right: 0.4rem;
+    }
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CareerConnect</h1>
+    <p>Your gateway to new career opportunities!</p>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Jobs</a>
+    <a href="#">Post a Job</a>
+    <a href="#">Dashboard</a>
+    <a href="#">Login</a>
+  </nav>
+
+  <div class="container">
+
+    <h2 class="section-title">🔍 Featured Jobs</h2>
+
+    <div class="job-card">
+      <h3>💻 Frontend Developer</h3>
+      <p><strong>Company:</strong> PixelTech | <strong>Location:</strong> Remote | <strong>Experience:</strong> 2+ years</p>
+      <p><strong>Skills:</strong> React, HTML5, CSS3, JavaScript, Git</p>
+      <a href="#" class="btn">Apply Now</a>
+    </div>
+
+    <div class="job-card">
+      <h3>🛠 Backend Developer</h3>
+      <p><strong>Company:</strong> CodeSmiths | <strong>Location:</strong> Bengaluru | <strong>Experience:</strong> 3+ years</p>
+      <p><strong>Skills:</strong> Node.js, Express, MongoDB, API Integration</p>
+      <a href="#" class="btn">Apply Now</a>
+    </div>
+
+    <h2 class="section-title">📤 Apply for a Job</h2>
+
+    <div class="form">
+      <form>
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" placeholder="Enter your full name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+
+        <label for="resume">Upload Resume</label>
+        <input type="file" id="resume" accept=".pdf,.docx" required>
+
+        <label for="coverletter">Cover Letter</label>
+        <textarea id="coverletter" rows="4" placeholder="Write a short cover letter..."></textarea>
+
+        <button type="submit" class="btn">Submit Application</button>
+      </form>
+    </div>
+
+    <h2 class="section-title">📊 Employer Dashboard (Preview)</h2>
+
+    <div class="dashboard">
+      <p><span class="icon">📌</span>Post and manage job listings</p>
+      <p><span class="icon">📥</span>View applicant resumes and profiles</p>
+      <p><span class="icon">🔔</span>Email notifications for new applications</p>
+    </div>
+
+    <h2 class="section-title">👤 Candidate Dashboard (Preview)</h2>
+
+    <div class="dashboard">
+      <p><span class="icon">📝</span>Manage profile, resume, and preferences</p>
+      <p><span class="icon">📄</span>Track applications and interview status</p>
+      <p><span class="icon">📧</span>Receive updates and email alerts</p>
+    </div>
+
+    <h2 class="section-title">📱 Mobile Responsiveness</h2>
+    <div class="highlight-box">
+      <p>This website is fully responsive and works perfectly on phones, tablets, and desktops. Test it using browser dev tools or real devices.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 CareerConnect. Built with ❤️ using HTML, CSS, React & Node.js</p>
+  </footer>
+
+</body>
+</html>
