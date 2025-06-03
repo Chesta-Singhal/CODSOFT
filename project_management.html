@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Manager | CodSoft</title>
+  <!-- React + Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #e0e7ff, #f0f4ff);
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #1e3a8a;
+      margin-bottom: 25px;
+    }
+
+    .form input, .form button {
+      padding: 10px;
+      font-size: 15px;
+      margin: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .form button {
+      background: #1e3a8a;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form button:hover {
+      background: #3b5bdb;
+    }
+
+    .project {
+      background-color: #f8fafc;
+      border-left: 5px solid #3b82f6;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .project h2 {
+      color: #1e40af;
+      margin-bottom: 8px;
+    }
+
+    .task-list ul {
+      padding-left: 20px;
+    }
+
+    .task-list li {
+      margin: 5px 0;
+      padding: 8px 10px;
+      background: #e0f2fe;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .task-list li.done {
+      background: #bbf7d0;
+      text-decoration: line-through;
+    }
+
+    .badge {
+      background: #0ea5e9;
+      color: #fff;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    .done .badge {
+      background: #10b981;
+    }
+
+    @media (max-width: 600px) {
+      .form input {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    function App() {
+      const [projects, setProjects] = useState([]);
+
+      const addProject = (project) => {
+        setProjects([...projects, project]);
+      };
+
+      return (
+        <div className="container">
+          <h1>🚀 Project Management Tool</h1>
+          <ProjectForm onAdd={addProject} />
+          <ProjectList projects={projects} />
+        </div>
+      );
+    }
+
+    function ProjectForm({ onAdd }) {
+      const [title, setTitle] = useState("");
+      const [deadline, setDeadline] = useState("");
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!title || !deadline) return;
+        onAdd({ title, deadline });
+        setTitle("");
+        setDeadline("");
+      };
+
+      return (
+        <form className="form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Enter Project Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <input
+            type="date"
+            value={deadline}
+            onChange={(e) => setDeadline(e.target.value)}
+            required
+          />
+          <button type="submit">Add Project</button>
+        </form>
+      );
+    }
+
+    function ProjectList({ projects }) {
+      return (
+        <div className="project-list">
+          {projects.map((project, index) => (
+            <div className="project" key={index}>
+              <h2>{project.title}</h2>
+              <p><strong>Deadline:</strong> {project.deadline}</p>
+              <TaskList />
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    function TaskList() {
+      const [tasks, setTasks] = useState([]);
+      const [taskInput, setTaskInput] = useState("");
+
+      const addTask = () => {
+        if (!taskInput.trim()) return;
+        setTasks([...tasks, { name: taskInput, done: false }]);
+        setTaskInput("");
+      };
+
+      const toggleTask = (index) => {
+        const updated = [...tasks];
+        updated[index].done = !updated[index].done;
+        setTasks(updated);
+      };
+
+      return (
+        <div className="task-list">
+          <input
+            type="text"
+            placeholder="New task..."
+            value={taskInput}
+            onChange={(e) => setTaskInput(e.target.value)}
+          />
+          <button onClick={addTask}>Add Task</button>
+          <ul>
+            {tasks.map((task, i) => (
+              <li
+                key={i}
+                className={task.done ? "done" : ""}
+                onClick={() => toggleTask(i)}
+              >
+                {task.name}
+                <span className="badge">{task.done ? "Done" : "Pending"}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
